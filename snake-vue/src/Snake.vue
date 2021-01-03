@@ -16,12 +16,21 @@ export default {
     #snake-app {
         margin: 0;
         padding: 0;
+    }
+
+    body,
+    #snake-app {
         width: calc(100%);
         height: calc(100%);
-        overflow: hidden;
     }
 
     body {
         background: black;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    #snake-app {
+        overflow: hidden;
     }
 </style>

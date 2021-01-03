@@ -365,7 +365,7 @@ export default {
 }
 </script> 
 
-<style>
+<style scoped>
     .app-container {
         width: calc(100%);
         height: calc(100%);
@@ -393,7 +393,7 @@ export default {
         background: rgba(255, 255, 255, 0.8);
         color: rgba(0, 0, 0, 0.8);
         border-radius: 10px;
-        padding: 10px;
+        padding: 5px 10px;
         cursor: pointer;
     }
 
@@ -402,7 +402,7 @@ export default {
     }
 
     .app {
-        height: calc(90%);
+        height: calc(90vh);
         width: calc(100%);
         display: flex;
         justify-content: center;
@@ -418,6 +418,9 @@ export default {
     }
 
     @media screen and (max-aspect-ratio: 1/1) {
+        .tool_panel {
+            height: 10vw;
+        }
         .app_scene {
             width: 90vw;
             height: 90vw;
