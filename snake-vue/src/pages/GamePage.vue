@@ -2,10 +2,14 @@
     <div
         class="app_container"
     >
-        <div
-            class="tool_panel"
-            @click="restart"
-        ></div>
+        <div class="tool_panel">
+            <div
+                class="restart-button"
+                @click="restart"
+            >
+                <span>Restart Game</span>
+            </div>
+        </div>
         <div class="app">
             <div class="app_scene">
                 <EnvObj
@@ -380,6 +384,21 @@ export default {
     .tool_panel {
         height: 10vh;
         background-color: rgba(0, 0, 255, 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .restart-button {
+        background: rgba(255, 255, 255, 0.8);
+        color: rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .restart-button span {
+        pointer-events: none;
     }
 
     .app {
