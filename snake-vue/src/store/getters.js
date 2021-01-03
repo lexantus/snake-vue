@@ -60,6 +60,9 @@ const getters = {
     gameParams(state) {
         return state.gameParams;
     },
+    canMove(state) {
+        return state.snake.canMove;
+    },
 };
 
 export default getters;

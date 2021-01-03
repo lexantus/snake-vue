@@ -26,6 +26,9 @@ const actions = {
     changeSnakeDirection({ commit }, direction) {
         commit('setSnakeDirection', direction);
     },
+    changeMovingAbility({ commit }, status) {
+        commit('setMovingAbility', status);
+    },
 };
 
 export default actions;

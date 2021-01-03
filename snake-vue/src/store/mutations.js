@@ -32,6 +32,9 @@ const mutations = {
     setSnakeDirection(state, direction) {
         state.snake.params.currentDirection = direction;
     },
+    setMovingAbility(state, status) {
+        state.snake.canMove = status;
+    },
 };
 
 export default mutations;

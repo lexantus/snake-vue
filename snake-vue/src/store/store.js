@@ -31,6 +31,7 @@ export default new Vuex.Store({
                 directions: mixins.directions,
             },
             isMoving: false,
+            canMove: true,
             baseZone: [],
             bodyCoords: [],
             headCoords: {},

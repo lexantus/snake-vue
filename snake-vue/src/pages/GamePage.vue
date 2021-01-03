@@ -2,7 +2,10 @@
     <div
         class="app_container"
     >
-        <div class="tool_panel"></div>
+        <div
+            class="tool_panel"
+            @click="restart"
+        ></div>
         <div class="app">
             <div class="app_scene">
                 <EnvObj
@@ -61,6 +64,7 @@ export default {
             'snakeCurrentLength',
             'snakeDefaultLength',
             'snakeParams',
+            'canMove',
         ]),
     },
     methods: {
@@ -251,6 +255,10 @@ export default {
         getDirectionByButton(event) {
             const self = this;
 
+            if (!self.canMove) {
+                return;
+            }
+
             const { keyCode } = event;
             const directionCodes = {
                 '37': 'left',
@@ -262,11 +270,16 @@ export default {
             if (keyCode >= 37 && keyCode <= 40) {
                 self.changeDirection(directionCodes[keyCode]);
             }
+
+            if (!self.isSnakeMoving && self.canMove) {
+                self.$store.dispatch('changeSnakeMovementStatus', true);
+                self.drawSnakeNextStep();
+            }
         },
         drawSnakeNextStep() {
             const self = this;
 
-            if (!self.isSnakeMoving || !self.checkIfSnakeHeadExist()) {
+            if (!self.isSnakeMoving || !self.canMove || !self.checkIfSnakeHeadExist()) {
                 return;
             }
 
@@ -274,6 +287,9 @@ export default {
             const snakeNextStepCoords = this.getHeadNextStepCoords(snakeHead, self.currentDirection);
 
             if (!self.isNextSnakeStep(snakeNextStepCoords)) {
+                self.$store.dispatch('changeSnakeMovementStatus', false);
+                self.$store.dispatch('changeMovingAbility', false);
+
                 return;
             }
 
@@ -324,15 +340,23 @@ export default {
             this.refreshEnviroment();
             this.refreshSnake();
             this.refreshFood();
-            this.$store.dispatch('changeSnakeDirection', 'right');
-            this.$store.dispatch('changeSnakeMovementStatus', true);
+        },
+        resetGame() {
+            this.$store.dispatch('changeSnakeMovementStatus', false);
+            this.$store.dispatch('changeMovingAbility', true);
+            this.$store.dispatch('changeSpeedToDefault');
+        },
+        addControls() {
             document.addEventListener('keydown', this.getDirectionByButton);
-            
-            this.drawSnakeNextStep();
+        },
+        restart() {
+            this.resetGame();
+            this.drawGame();
         },
     },
     mounted() {
        this.drawGame();
+       this.addControls();
     }
 }
 </script> 
