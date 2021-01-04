@@ -12,5 +12,4 @@ Coming up next:
 -Food logic with speed and length increase;
 -Score system;
 -Sprite animation, sound and music effects;
--Tool panel, customizable game options;
--Rewrite stable version on vue.js with router and vuex (done).
+-Tool panel, customizable game options.
