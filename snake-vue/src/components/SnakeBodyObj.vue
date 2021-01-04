@@ -9,6 +9,7 @@
             height: options.height,
             top: options.top,
             left: options.left,
+            transform: getTransform(),
             transition: getTransition(),
         }"
     ></div>
@@ -26,13 +27,44 @@ export default {
             type: Number,
             required: true,
         },
-        isHead: {
-            type: Boolean,
+        index: {
+            type: Number,
+            required: true,
+            default: 0,
         },
+        len: {
+            type: Number,
+            required: true,
+            default: 0,
+        }
     },
     methods: {
         getTransition() {
-            return `left ${this.speed}ms linear, top ${this.speed}ms linear`;
+            return `left ${this.speed}ms linear, top ${this.speed}ms linear, transform 200ms linear`;
+        },
+        isHead() {
+            return this.index === 0;
+        },
+        isLastBlock() {
+            return this.index === this.len - 1;
+        },
+        isBeforeLastBlock() {
+            return this.index === this.len - 2;
+        },
+        getTransform() {
+            if (this.isHead()) {
+                return 'scale(1)';
+            }
+
+            if (this.isLastBlock()) {
+                return 'scale(0.8)';
+            }
+
+            if (this.isBeforeLastBlock()) {
+                return 'scale(0.85)';
+            }
+
+            return 'scale(0.9)';
         },
     },
 }

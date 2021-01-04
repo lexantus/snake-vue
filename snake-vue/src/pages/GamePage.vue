@@ -27,7 +27,8 @@
                     :key="snakeObj"
                     :options="getBlockParams(snakeObj)"
                     :speed="currentSpeed"
-                    :is-head="(index === 0)"
+                    :index="index"
+                    :len="snakeBlocks.length"
                 />
             </div>
         </div>
