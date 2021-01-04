@@ -32,6 +32,7 @@ export default new Vuex.Store({
             },
             isMoving: false,
             canMove: true,
+            canSwitchDirection: true,
             baseZone: [],
             bodyCoords: [],
             headCoords: {},

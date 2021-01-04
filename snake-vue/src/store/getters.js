@@ -63,6 +63,9 @@ const getters = {
     canMove(state) {
         return state.snake.canMove;
     },
+    canSwitchDirection(state) {
+        return state.snake.canSwitchDirection;
+    },
 };
 
 export default getters;

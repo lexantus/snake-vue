@@ -70,6 +70,7 @@ export default {
             'snakeDefaultLength',
             'snakeParams',
             'canMove',
+            'canSwitchDirection',
         ]),
     },
     methods: {
@@ -260,7 +261,7 @@ export default {
         getDirectionByButton(event) {
             const self = this;
 
-            if (!self.canMove) {
+            if (!self.canMove || !self.canSwitchDirection) {
                 return;
             }
 
@@ -274,12 +275,19 @@ export default {
 
             if (keyCode >= 37 && keyCode <= 40) {
                 self.changeDirection(directionCodes[keyCode]);
+                this.$store.dispatch('changeDirectionSwitchAbility', false);
             }
 
             if (!self.isSnakeMoving && self.canMove) {
                 self.$store.dispatch('changeSnakeMovementStatus', true);
                 self.drawSnakeNextStep();
             }
+        },
+        increaseSpeed() {
+            const { currentSpeed } = this;
+            const increasedSpeed = currentSpeed - (currentSpeed * 0.04);
+
+            this.$store.dispatch('changeCurrentSpeed', increasedSpeed);
         },
         drawSnakeNextStep() {
             const self = this;
@@ -333,7 +341,12 @@ export default {
                     y: additionalBlock.y,
                 });
 
+                self.increaseSpeed();
                 self.refreshFood();
+            }
+
+            if (!self.canSwitchDirection) {
+                this.$store.dispatch('changeDirectionSwitchAbility', true);
             }
 
             setTimeout(() => {
@@ -350,6 +363,7 @@ export default {
             this.$store.dispatch('changeSnakeMovementStatus', false);
             this.$store.dispatch('changeMovingAbility', true);
             this.$store.dispatch('changeSpeedToDefault');
+            this.$store.dispatch('changeDirectionSwitchAbility', true);
         },
         addControls() {
             document.addEventListener('keydown', this.getDirectionByButton);

@@ -17,6 +17,9 @@ const actions = {
     changeSpeedToDefault({ commit }) {
         commit('setDefaultSpeed');
     },
+    changeCurrentSpeed({ commit }, newSpeed) {
+        commit('setCurrentSpeed', newSpeed);
+    },
     changeSnakeMovementStatus({ commit }, newStatus) {
         commit('setSnakeMoving', newStatus);
     },
@@ -28,6 +31,9 @@ const actions = {
     },
     changeMovingAbility({ commit }, status) {
         commit('setMovingAbility', status);
+    },
+    changeDirectionSwitchAbility({ commit }, status) {
+        commit('setDirectionSwitchAbility', status);
     },
 };
 

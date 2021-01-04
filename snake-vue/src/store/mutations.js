@@ -35,6 +35,12 @@ const mutations = {
     setMovingAbility(state, status) {
         state.snake.canMove = status;
     },
+    setCurrentSpeed(state, newSpeed) {
+        state.gameParams.currentSpeed = newSpeed;
+    },
+    setDirectionSwitchAbility(state, status) {
+        state.snake.canSwitchDirection = status;
+    },
 };
 
 export default mutations;
