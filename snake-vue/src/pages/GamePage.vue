@@ -40,6 +40,7 @@ import { mapGetters } from 'vuex';
 
 import snakeApi from '../api/snakeApi';
 
+// Где-то есть расширение vue, где-то нет. Привести к единому виду
 import EnvObj from '../components/EnvObj';
 import FoodObj from '../components/FoodObj.vue';
 import SnakeBodyObj from '../components/SnakeBodyObj';
@@ -101,7 +102,7 @@ export default {
             return (this.snakeBlocks.length > 0);
         },
         createBlockCoords(options) {
-            const self = this;
+            const self = this; // Без этой строчки контекст потеряется?
 
             const {
                 isBaseZoneException,
@@ -132,7 +133,7 @@ export default {
                 return;
             }
 
-            self.createBlockCoords(options);
+            self.createBlockCoords(options); // Возможен ли такой вариант, что isValidRandomCoords всгеда false и рекурсия будет бесконечной?
         },
         fillBaseZone() {
             this.$store.dispatch('changeBaseZoneObjects', []);
@@ -188,7 +189,7 @@ export default {
 
             setTimeout(() => {
                 this.$store.dispatch('changeFoodObjects', repository);
-            }, 0);
+            }, 0); // setTimeout возвращает айдишник таймера, чтобы потом чистить его(должен быть еще clearTimeout по идее). Еще странно что второй параметр 0.
         },
         refreshSnake() {
             this.$store.dispatch('changeSnakeObjects', []);
@@ -199,7 +200,7 @@ export default {
             const y = Math.floor(self.sceneParams.baseZoneTopStart + (self.sceneParams.baseZoneTopOffset / 2));
             const offsetX = self.sceneParams.baseZoneLeftStart;
 
-            for (let x = (offsetX + self.snakeParams.defaultLength - 1); x >= offsetX; x--) {
+            for (let x = (offsetX + self.snakeParams.defaultLength - 1); x >= offsetX; x--) { 
                 repository.push({ x, y });
             }
 
