@@ -53,7 +53,7 @@ export default {
         },
         getTransform() {
             if (this.isHead()) {
-                return 'scale(1)';
+                return 'scale(1)'; // зачем для головы умножать на 1 если ничего от этого не измениться?
             }
 
             if (this.isLastBlock()) {
